@@ -152,6 +152,8 @@ constexpr auto CLSID_Z_TEAM_BASE = MK_CLSID('Z', '_', 'T', 'E', 'A', 'M', 'B', '
 constexpr auto CLSID_Z_TORRID = MK_CLSID('Z', '_', 'T', 'O', 'R', 'R', 'I', 'D');
 constexpr auto CLSID_SPACE_RESTRICTOR = MK_CLSID('S', 'P', 'A', 'C', 'E', '_', 'R', 'S');
 constexpr auto CLSID_SMART_ZONE = MK_CLSID('S', 'M', 'R', 'T', 'Z', 'O', 'N', 'E');
+//#+#
+constexpr auto CLSID_Z_BATUT = MK_CLSID('Z', '_', 'B', 'A', 'T', 'U', 'T', ' ');
 
 // Detectors
 constexpr auto CLSID_DETECTOR_SIMPLE_SHOC = MK_CLSID('D', '_', 'S', 'I', 'M', 'D', 'E', 'T');
@@ -159,6 +161,9 @@ constexpr auto CLSID_DETECTOR_SIMPLE = MK_CLSID('D', 'E', 'T', '_', 'S', 'I', 'M
 constexpr auto CLSID_DETECTOR_ADVANCED = MK_CLSID('D', 'E', 'T', '_', 'A', 'D', 'V', 'A');
 constexpr auto CLSID_DETECTOR_ELITE = MK_CLSID('D', 'E', 'T', '_', 'E', 'L', 'I', 'T');
 constexpr auto CLSID_DETECTOR_SCIENTIFIC = MK_CLSID('D', 'E', 'T', '_', 'S', 'C', 'I', 'E');
+//#+#
+constexpr auto CLSID_DETECTOR_METAL = MK_CLSID('D', 'E', 'T', '_', 'M', 'E', 'T', 'A');
+
 
 // PDA
 constexpr auto CLSID_DEVICE_PDA = MK_CLSID('D', '_', 'P', 'D', 'A', ' ', ' ', ' ');
@@ -176,6 +181,8 @@ constexpr auto CLSID_IITEM_FOOD = MK_CLSID('I', 'I', '_', 'F', 'O', 'O', 'D', ' 
 constexpr auto CLSID_IITEM_BOTTLE = MK_CLSID('I', 'I', '_', 'B', 'O', 'T', 'T', 'L');
 constexpr auto CLSID_IITEM_ANTIRAD = MK_CLSID('I', 'I', '_', 'A', 'N', 'T', 'I', 'R');
 constexpr auto CLSID_IITEM_EXPLOSIVE = MK_CLSID('I', 'I', '_', 'E', 'X', 'P', 'L', 'O');
+//#+#
+constexpr auto CLSID_IITEM_CONTAINER = MK_CLSID('I', 'I', '_', 'C', 'O', 'N', 'T', ' ');
 
 // Info Document
 constexpr auto CLSID_IITEM_DOCUMENT = MK_CLSID('I', 'I', '_', 'D', 'O', 'C', ' ', ' ');
@@ -207,3 +214,5 @@ constexpr auto CLSID_CL_GAME_SINGLE = MK_CLSID('C', 'L', '_', 'S', 'I', 'N', 'G'
 constexpr auto CLSID_GAME_UI_SINGLE = MK_CLSID('U', 'I', '_', 'S', 'I', 'N', 'G', 'L');
 
 constexpr auto CLSID_ONLINE_OFFLINE_GROUP = MK_CLSID('O', 'N', '_', 'O', 'F', 'F', '_', 'G');
+
+

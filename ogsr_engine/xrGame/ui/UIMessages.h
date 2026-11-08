@@ -128,4 +128,8 @@ enum EUIMessages : s16
     MAP_SELECT_SPOT2,
     MAP_REMOVE_SPOT_ACT,
     MAP_CHANGE_SPOT_HINT_ACT,
+
+    // #+# del
+    INVENOTRY_LOOK_OBJECT,
+
 };

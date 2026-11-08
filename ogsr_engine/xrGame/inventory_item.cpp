@@ -145,7 +145,24 @@ void CInventoryItem::Load(LPCSTR section)
     m_always_ungroupable = READ_IF_EXISTS(pSettings, r_bool, section, "always_ungroupable", false);
 
     m_need_brief_info = READ_IF_EXISTS(pSettings, r_bool, section, "show_brief_info", true);
+
+
+    LoadSCParams(section, pSettings);
 }
+
+void CInventoryItem::LoadSCParams(LPCSTR section, CInifile* ini)
+{
+    if (ini->line_exist(section, "item_rank"))
+        m_ItemRank = CStringTable().translate(ini->r_string(section, "item_rank"));
+    if (ini->line_exist(section, "item_class"))
+        m_ItemClass = CStringTable().translate(ini->r_string(section, "item_class"));
+    if (ini->line_exist(section, "item_type"))
+        m_ItemType = CStringTable().translate(ini->r_string(section, "item_type"));
+    if (ini->line_exist(section, "item_subclass"))
+        m_ItemSubclass = CStringTable().translate(ini->r_string(section, "item_subclass"));
+}
+
+
 
 void CInventoryItem::ReloadNames()
 {

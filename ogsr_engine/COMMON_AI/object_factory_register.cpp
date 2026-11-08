@@ -101,6 +101,8 @@
 #include "fooditem.h"
 #include "bottleitem.h"
 #include "explosiveitem.h"
+//#+#
+#include "Container.h"
 
 #include "infodocument.h"
 #include "attachable_item.h"
@@ -127,10 +129,12 @@
 #include "hairszone.h"
 #include "amebazone.h"
 #include "nogravityzone.h"
+#include "CBatutZone.h"
 #include "SimpleDetectorSHOC.h"
 #include "SimpleDetector.h"
 #include "EliteDetector.h"
 #include "AdvancedDetector.h"
+#include "MetalDetector.h"
 
 #include "torch.h"
 #include "pda.h"
@@ -269,6 +273,8 @@ void CObjectFactory::register_classes()
     ADD(CFoodItem, CSE_ALifeItem, CLSID_IITEM_FOOD, "obj_food");
     ADD(CBottleItem, CSE_ALifeItem, CLSID_IITEM_BOTTLE, "obj_bottle");
     ADD(CExplosiveItem, CSE_ALifeItemExplosive, CLSID_IITEM_EXPLOSIVE, "obj_explosive");
+    //#+#
+    ADD(CContainerItemObject, CSE_ALifeItem, CLSID_IITEM_CONTAINER, "obj_container");
 
     // Info Document
     ADD(CInfoDocument, CSE_ALifeItemDocument, CLSID_IITEM_DOCUMENT, "obj_document");
@@ -301,7 +307,10 @@ void CObjectFactory::register_classes()
     ADD(CLevelChanger, CSE_ALifeLevelChanger, CLSID_LEVEL_CHANGER, "level_changer");
     ADD(CScriptZone, CSE_ALifeSpaceRestrictor, CLSID_SCRIPT_ZONE, "script_zone");
     ADD(CSmartZone, CSE_ALifeSmartZone, CLSID_SMART_ZONE, "smart_zone");
-    
+    //#+#
+    ADD(CBatutZone, CSE_ALifeAnomalousZone, CLSID_Z_BATUT, "batut_zone");
+
+
     ADD(CTorridZone, CSE_ALifeTorridZone, CLSID_Z_TORRID, "torrid_zone");
     ADD(CSpaceRestrictor, CSE_ALifeSpaceRestrictor, CLSID_SPACE_RESTRICTOR, "space_restrictor");
     ADD(CAmebaZone, CSE_ALifeZoneVisual, CLSID_Z_AMEBA, "ameba_zone");
@@ -313,6 +322,8 @@ void CObjectFactory::register_classes()
     ADD(CAdvancedDetector, CSE_ALifeItemDetector, CLSID_DETECTOR_ADVANCED, "device_detector_advanced");
     ADD(CEliteDetector, CSE_ALifeItemDetector, CLSID_DETECTOR_ELITE, "device_detector_elite");
     ADD(CScientificDetector, CSE_ALifeItemDetector, CLSID_DETECTOR_SCIENTIFIC, "device_detector_scientific");
+    // #+#
+    ADD(CMetalDetector, CSE_ALifeItemDetector, CLSID_DETECTOR_METAL, "device_detector_metal");
 
     // Devices
     ADD(CTorch, CSE_ALifeItemTorch, CLSID_DEVICE_TORCH, "device_torch");

@@ -45,6 +45,7 @@ void CUIInventoryWnd::ActivatePropertiesBox()
     CCustomOutfit* pOutfit = smart_cast<CCustomOutfit*>(CurrentIItem());
     CWeapon* pWeapon = smart_cast<CWeapon*>(CurrentIItem());
     CBottleItem* pBottleItem = smart_cast<CBottleItem*>(CurrentIItem());
+    CSCItemContainer* pContainer = smart_cast<CSCItemContainer*>(CurrentIItem());
 
     bool b_show = false;
 
@@ -185,12 +186,19 @@ void CUIInventoryWnd::ActivatePropertiesBox()
 
     if (!disallow_drop)
     {
+
+
         UIPropertiesBox.AddItem("st_drop", NULL, INVENTORY_DROP_ACTION);
         b_show = true;
 
         if (CurrentItem()->ChildsCount())
             UIPropertiesBox.AddItem("st_drop_all", (void*)33, INVENTORY_DROP_ACTION);
     }
+
+        // #+# del
+    if (pContainer)
+        UIPropertiesBox.AddItem("st_look_item", NULL, INVENOTRY_LOOK_OBJECT);
+
 
     if (b_show)
     {
@@ -249,6 +257,14 @@ void CUIInventoryWnd::ProcessPropertiesBoxClicked()
         }
         break;
         case INVENTORY_EAT_ACTION: EatItem(CurrentIItem()); break;
+        //#+# del
+        case INVENOTRY_LOOK_OBJECT: {
+            auto* item = smart_cast<CSCItemContainer*>(CurrentIItem());
+            m_test_wnd->Show(item);
+            BringToTop(m_test_wnd);
+        }
+        break;
+
         case INVENTORY_ATTACH_ADDON: AttachAddon((PIItem)(UIPropertiesBox.GetClickedItem()->GetData())); break;
         case INVENTORY_DETACH_SCOPE_ADDON: DetachAddon(*(smart_cast<CWeapon*>(CurrentIItem()))->GetScopeName()); break;
         case INVENTORY_DETACH_SILENCER_ADDON: DetachAddon(*(smart_cast<CWeapon*>(CurrentIItem()))->GetSilencerName()); break;

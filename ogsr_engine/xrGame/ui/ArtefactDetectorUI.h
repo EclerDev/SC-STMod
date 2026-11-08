@@ -1,4 +1,5 @@
 #pragma once
+#include "MetalDetector.h"
 
 class CUIStatic;
 class CSimpleDetector;
@@ -88,4 +89,39 @@ public:
     static void BoneCallback(CBoneInstance* B);
     void ResetBoneCallbacks();
     void SetBoneCallbacks();
+};
+
+class CUIMetallDetector : public CUIArtefactDetectorBase, public CUIWindow
+{
+    typedef CUIArtefactDetectorBase inherited;
+
+    string_unordered_map<shared_str, CUIStatic*> m_palette;
+
+    struct SDrawOneItem
+    {
+        SDrawOneItem(CUIStatic* s, const Fvector& p) : pStatic(s), pos(p) {}
+        CUIStatic* pStatic;
+        Fvector pos;
+    };
+
+    CMetalDetector* m_parent{};
+
+protected:
+    xr_vector<SDrawOneItem> m_items_to_draw;
+    void GetUILocatorMatrix(Fmatrix& _m);
+
+public:
+    Fmatrix m_map_attach_offset{};
+    CUIWindow* m_wrk_area{};
+    CUIProgressShape* m_pSector = nullptr;
+
+    float m_sector_min_angle = 1.f;
+    float m_sector_max_angle = 179.f;
+
+    virtual void update() override;
+    virtual void Draw() override;
+
+    void construct(CMetalDetector* p);
+    void Clear();
+    void RegisterItemToDraw(const Fvector& p, const shared_str& palette_idx);
 };

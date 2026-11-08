@@ -14,6 +14,9 @@ class CInventory;
 #include "UIItemInfo.h"
 #include "../inventory_space.h"
 
+//#+#del
+#include "Container.h"
+
 class CArtefact;
 class CUI3tButton;
 class CUIDragDropListEx;
@@ -179,4 +182,8 @@ public:
     PIItem CurrentIItem();
     void UpdateWeight();
     void UpdateOutfit();
+
+//#+# del
+public:
+    CUIItemContainerInfo* m_test_wnd = nullptr;
 };

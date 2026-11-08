@@ -125,6 +125,8 @@ void CActorCondition::LoadCondition(LPCSTR entity_section)
     }
 
     m_MaxWalkWeight = pSettings->r_float(section, "max_walk_weight");
+
+    this->LoadChars(section, pSettings);
 }
 
 //вычисление параметров с ходом времени
@@ -672,4 +674,11 @@ void CActorCondition::net_Relcase(CObject* O)
     if (Level().is_removing_objects())
         return;
     monsters_feel_touch->feel_touch_relcase(O);
+}
+
+//#+# del
+void CActorCondition::LoadChars(LPCSTR section, CInifile* pIni) 
+{ 
+    actor_char.LoadChar(section, pIni);
+    actor_infection.LoadInfection(section, pIni);
 }

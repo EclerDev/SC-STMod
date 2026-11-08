@@ -677,6 +677,10 @@ void CActor::Die(CObject* who)
     m_HeavyBreathSnd.stop();
     m_BloodSnd.stop();
 
+    //#+# del
+    //actor_char.Clear();
+   // actor_infection.Clear();
+
     start_tutorial("game_over");
     xr_delete(m_sndShockEffector);
 }

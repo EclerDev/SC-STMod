@@ -121,6 +121,9 @@ protected:
     bool b_foot_mtl_check;
     dReal m_friction_factor;
 
+    //#+#
+    bool b_ignore_cut_force;
+
 public:
     CPHSimpleCharacter();
     virtual ~CPHSimpleCharacter() { Destroy(); }
@@ -234,6 +237,10 @@ public:
     virtual void ValidateWalkOn();
     bool ValidateWalkOnMesh();
     bool ValidateWalkOnObject();
+
+    //#+#
+    void IgnoreCutForce(bool ignore) { b_ignore_cut_force = ignore; }
+
 
 private:
     void CheckCaptureJoint();

@@ -35,6 +35,8 @@
 #include "GamePersistent.h"
 #include "EffectorBobbing.h"
 #include "LevelDebugScript.h"
+#include "MetalDetector.h"
+
 
 using namespace luabind;
 
@@ -90,6 +92,22 @@ CScriptGameObject* get_object_by_id(u32 id)
 
     return pGameObject->lua_game_object();
 }
+//s#+#
+CScriptGameObject* get_object_by_name(LPCSTR name)
+{
+    CGameObject* pGameObject = smart_cast<CGameObject*>(Level().Objects.FindObjectByName(name));
+    if (!pGameObject || pGameObject->getDestroy())
+        return nullptr;
+
+    return pGameObject->lua_game_object();
+}
+
+void add_metal_spot(const Fvector& pos) { g_metal_spots.AddSpot(pos); }
+void remove_metal_spot(const Fvector& pos) { g_metal_spots.RemoveSpot(pos); }
+void clear_metal_spots() { g_metal_spots.ClearSpots(); }
+
+//e#+#
+
 
 LPCSTR get_weather() { return (*g_pGamePersistent->Environment().GetWeather()); }
 
@@ -1043,6 +1061,7 @@ void CLevel::script_register(lua_State* L)
         module(L, "level")[(
             // obsolete\deprecated
             def("object_by_id", &get_object_by_id), def("is_removing_objects", &is_removing_objects_script),
+            def("object_by_name", &get_object_by_name),
 #ifdef DEBUG
             def("debug_object", &get_object_by_name), def("debug_actor", &tpfGetActor), def("check_object", &check_object),
 #endif
@@ -1138,7 +1157,11 @@ void CLevel::script_register(lua_State* L)
             def("get_effector_bobbing", &get_effector_bobbing), def("is_ray_intersect_sphere", &is_ray_intersect_sphere),
 
             def("block_action", [](EGameActions action) { Level().block_action(action); }),
-            def("unblock_action", [](EGameActions action) { Level().unblock_action(action); })
+            def("unblock_action", [](EGameActions action) { Level().unblock_action(action); }),
+
+            // #+# Споты для металлоискателя
+            def("add_metal_spot", &add_metal_spot), def("remove_metal_spot", &remove_metal_spot), def("clear_metal_spots", &clear_metal_spots)
+
     )],
 
         module(L, "actor_stats")[(def("add_points", &add_actor_points), def("add_points_str", &add_actor_points_str), def("get_points", &get_actor_points),

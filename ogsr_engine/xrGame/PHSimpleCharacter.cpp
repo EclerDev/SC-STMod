@@ -180,6 +180,9 @@ CPHSimpleCharacter::CPHSimpleCharacter()
     m_collision_damage_factor = 1.f;
     b_collision_restrictor_touch = false;
     b_foot_mtl_check = true;
+
+    // #+#
+    b_ignore_cut_force = false;
 }
 
 void CPHSimpleCharacter::TestPathCallback(bool& do_colide, bool bo1, dContact& c, SGameMtl* /*material_1*/, SGameMtl* /*material_2*/)
@@ -722,7 +725,12 @@ void CPHSimpleCharacter::PhTune(dReal step)
     //		dBodyAddForce(m_body,0,-m.mass*ph_world->Gravity()/fixed_step,0);
     // }
 
-    BodyCutForce(m_body, 5.f, 0.f);
+    if (!b_ignore_cut_force)
+        BodyCutForce(m_body, 5.f, 0.f);
+
+    if (b_on_ground)
+        IgnoreCutForce(false);
+
 #ifdef DEBUG
     if (ph_dbg_draw_mask.test(phDbgCharacterControl))
     {

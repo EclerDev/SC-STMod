@@ -15,6 +15,7 @@
 #include "step_manager.h"
 #include "xr_level_controller.h"
 
+
 using namespace ACTOR_DEFS;
 
 class CInfoPortion;
@@ -607,6 +608,8 @@ public:
     virtual void ChangeVisual(shared_str NewVisual);
     virtual void OnChangeVisual();
 
+    void ApplyForceOnActor(Fvector dir, float p);
+
     //////////////////////////////////////////////////////////////////////////
     // Controlled Routines
     //////////////////////////////////////////////////////////////////////////
@@ -747,6 +750,8 @@ private:
 public:
     IC void SetDrugRadProtection(float _prot) { m_fDrugRadProtectionCoeff = _prot; };
     IC void SetDrugPsyProtection(float _prot) { m_fDrugPsyProtectionCoeff = _prot; };
+
+
 };
 
 extern bool isActorAccelerated(u32 mstate, bool ZoomMode);

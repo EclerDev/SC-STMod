@@ -230,6 +230,13 @@ public:
     // Actor only
     void SetActorPosition(Fvector pos, bool skipCollisionCorrect);
     void SetActorDirection(float dir);
+
+    // #+#
+    void SetObjectDirection(Fvector pos, Fvector dir);
+    bool SetBoneYaw(LPCSTR name, float yaw);
+    void ApplyForceOnPlayer(Fvector dir, float P);
+
+
     // CCustomMonster
     bool CheckObjectVisibility(const CScriptGameObject* tpLuaGameObject);
     bool CheckObjectVisibilityNow(const CScriptGameObject* tpLuaGameObject);
@@ -557,6 +564,13 @@ public:
     float GetAnomalyPower();
     void SetAnomalyPower(float p);
 
+    // #+# BatutZone
+    void SetBatutDirection(Fvector& dir);
+    void SetBatutPower(float p);
+    Fvector GetBatutDirection();
+    float GetBatutPower();
+
+
     // HELICOPTER
     CHelicopter* get_helicopter();
     // CAR
@@ -829,6 +843,39 @@ public:
     void setEnabled(bool value);
 
     void setVisible(bool value);
+
+
+    // #+#
+    CGameObject* get_game_object_safe() const
+    {
+        if (!m_game_object)
+            return nullptr;
+
+        if (m_game_object->getDestroy())
+            return nullptr;
+
+        if (m_game_object->lua_game_object() != this)
+            return nullptr;
+
+        return m_game_object;
+    };
+
+    bool operator==(const CScriptGameObject& other) const
+    {
+        const auto& selfObject = get_game_object_safe();
+        const auto& otherObject = other.get_game_object_safe();
+
+        if (&selfObject == &otherObject)
+            return true;
+
+        if (!selfObject || !otherObject)
+            return false;
+
+        if (selfObject->getDestroy() || otherObject->getDestroy())
+            return false;
+
+        return selfObject->ID() == otherObject->ID();
+    };
 
     DECLARE_SCRIPT_REGISTER_FUNCTION
 };

@@ -15,6 +15,11 @@ public:
     void SetPos(float pos);
     void SetTextVisible(bool b);
 
+    // #+#
+    void SetSectorCount(u32 sector_count) { m_sectorCount = sector_count; }
+    void SetAngleBegin(float angle) { m_angle_begin = angle; }
+    void SetAngleEnd(float angle) { m_angle_end = angle; }
+
     virtual void Draw();
 
 protected:

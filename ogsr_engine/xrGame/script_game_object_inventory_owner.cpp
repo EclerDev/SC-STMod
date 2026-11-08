@@ -40,6 +40,9 @@
 #include "WeaponMagazinedWGrenade.h"
 #include "encyclopedia_article.h"
 
+//#+#
+#include "CBatutZone.h"
+
 bool CScriptGameObject::GiveInfoPortion(LPCSTR info_id)
 {
     CInventoryOwner* pInventoryOwner = smart_cast<CInventoryOwner*>(&object());
@@ -1338,4 +1341,54 @@ void CScriptGameObject::IterateRuck(const luabind::functor<void>& functor, const
     for (const auto* it : inventory_owner->inventory().m_ruck)
         if (!it->object().getDestroy())
             functor(object, it->object().lua_game_object());
+}
+
+
+// #+#
+void CScriptGameObject::SetBatutDirection(Fvector& dir)
+{
+    CBatutZone* pBatutZone = smart_cast<CBatutZone*>(&object());
+    if (!pBatutZone)
+    {
+        ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError, "CBatutZone : cannot access class member SetBatutDirection!");
+        return;
+    }
+
+    pBatutZone->SetBatutDir(dir);
+}
+
+Fvector CScriptGameObject::GetBatutDirection()
+{
+    CBatutZone* pBatutZone = smart_cast<CBatutZone*>(&object());
+    if (!pBatutZone)
+    {
+        ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError, "CBatutZone : cannot access class member GetBatutDirection!");
+        return Fvector();
+    }
+
+    return pBatutZone->GetBatutDir();
+}
+
+void CScriptGameObject::SetBatutPower(float p)
+{
+    CBatutZone* pBatutZone = smart_cast<CBatutZone*>(&object());
+    if (!pBatutZone)
+    {
+        ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError, "CBatutZone : cannot access class member SetBatutPower!");
+        return;
+    }
+
+    pBatutZone->SetBatutPower(p);
+}
+
+float CScriptGameObject::GetBatutPower()
+{
+    CBatutZone* pBatutZone = smart_cast<CBatutZone*>(&object());
+    if (!pBatutZone)
+    {
+        ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError, "CBatutZone : cannot access class member GetBatutPower!");
+        return 0.0f;
+    }
+
+    return pBatutZone->GetBatutPower();
 }

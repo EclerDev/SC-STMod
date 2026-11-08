@@ -239,6 +239,11 @@ void CUIInventoryWnd::Init()
 
         uiXml.SetLocalRoot(stored_root);
     }
+
+    //#+#del
+    m_test_wnd = xr_new<CUIItemContainerInfo>();
+    AttachChild(m_test_wnd);
+        
 }
 
 EListType CUIInventoryWnd::GetType(CUIDragDropListEx* l)
@@ -335,6 +340,7 @@ void CUIInventoryWnd::Show()
     InitInventory();
     inherited::Show();
 
+
     if (Core.Features.test(xrCore::Feature::more_hide_weapon))
         Actor()->SetWeaponHideState(INV_STATE_INV_WND, true);
 
@@ -354,6 +360,9 @@ void CUIInventoryWnd::Hide()
 {
     PlaySnd(eInvSndClose);
     inherited::Hide();
+
+    //#+#
+    m_test_wnd->Hide();
 
     SendInfoToActor("ui_inventory_hide");
     ClearAllLists();

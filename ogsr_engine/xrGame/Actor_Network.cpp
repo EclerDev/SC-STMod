@@ -39,6 +39,10 @@
 
 #include "debug_renderer.h"
 
+//#+#
+#include "PHSimpleCharacter.h"
+
+
 CActor* g_actor = NULL;
 
 CActor* Actor()
@@ -411,6 +415,16 @@ void CActor::ChangeVisual(shared_str NewVisual)
         character_physics_support()->movement()->DestroyCharacter();
     }
 };
+
+void CActor::ApplyForceOnActor(Fvector dir, float P)
+{
+    CPHMovementControl* M = this->character_physics_support()->movement();
+    CPHSimpleCharacter* sp = smart_cast<CPHSimpleCharacter*>(M->PHCharacter());
+
+    this->character_physics_support()->movement()->ApplyImpulse(dir, P);
+    sp->IgnoreCutForce(true);
+}
+
 
 void CActor::save(NET_Packet& output_packet)
 {

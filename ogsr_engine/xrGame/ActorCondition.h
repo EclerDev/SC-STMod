@@ -6,6 +6,7 @@
 #include "EntityCondition.h"
 #include "actor_defs.h"
 #include "..\xr_3da\feel_touch.h"
+#include "Container.h"
 
 template <typename _return_type>
 class CScriptCallbackEx;
@@ -152,4 +153,11 @@ public:
         if (r > monsters_aura_radius)
             monsters_aura_radius = r;
     };
+
+    // #+# del mb
+public:
+    CItemChar actor_char;
+    CItemInfection actor_infection;
+
+    void LoadChars(LPCSTR section, CInifile* pIni);
 };

@@ -12,6 +12,7 @@
 #include "hit_immunity.h"
 #include "attachable_item.h"
 #include "ui\UIIconParams.h"
+#include "SC_UI.h"
 
 class CUIInventoryCellItem;
 
@@ -280,6 +281,23 @@ public:
     u8 GetLoadedBeltIndex() { return loaded_belt_index; };
     bool m_highlight_equipped;
     bool m_always_ungroupable;
+
+//#+# del mb
+public:
+
+    shared_str GetItemRank() { return m_ItemRank; };
+    shared_str GetItemClass() { return m_ItemClass; };
+    shared_str GetItemType() { return m_ItemType; };
+    shared_str GetItemSubClass() { return m_ItemSubclass; };
+protected:
+    shared_str m_ItemRank;
+    shared_str m_ItemClass;
+    shared_str m_ItemType;
+    shared_str m_ItemSubclass;
+    LPCSTR* m_ItemOwner = nullptr;
+
+    void LoadSCParams(LPCSTR section, CInifile* pIni);
+
 };
 
 #include "inventory_item_inline.h"

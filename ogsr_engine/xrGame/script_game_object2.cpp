@@ -38,6 +38,8 @@
 #include "movement_manager.h"
 #include "detail_path_manager.h"
 #include "CharacterPhysicsSupport.h"
+//#+#
+#include "PHSimpleCharacter.h"
 
 void CScriptGameObject::explode(u32 level_time)
 {
@@ -552,4 +554,90 @@ void CScriptGameObject::remove_memory_object(CScriptGameObject* game_object)
     CCustomMonster* monster = smart_cast<CCustomMonster*>(&object());
     ASSERT_FMT(monster, "[%s]: %s not a CCustomMonster", __FUNCTION__, cName().c_str());
     monster->memory().remove_links(&game_object->object());
+}
+
+//#+#
+void CScriptGameObject::ApplyForceOnPlayer(Fvector dir, float P)
+{
+    CActor* actor = smart_cast<CActor*>(&object());
+    CPHMovementControl* M = actor->character_physics_support()->movement();
+    CPHSimpleCharacter* sp = smart_cast<CPHSimpleCharacter*>(M->PHCharacter());
+
+    if (!actor)
+    {
+        ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError, "CActor: cannot access class member apply_force_player!");
+        return;
+    }
+    actor->character_physics_support()->movement()->ApplyImpulse(dir, P);
+    sp->IgnoreCutForce(true);
+}
+
+// #+#Поставить позицию и ориентацию обьекта
+void CScriptGameObject::SetObjectDirection(Fvector pos, Fvector dir)
+{
+    CGameObject* obj = smart_cast<CGameObject*>(&object());
+    if (!obj)
+        return;
+
+    CPhysicsShellHolder* holder = smart_cast<CPhysicsShellHolder*>(obj);
+    if (!holder)
+        return;
+
+    CPhysicsShell* shell = holder->PPhysicsShell();
+    if (!shell)
+        return;
+
+    Fmatrix m = obj->XFORM();
+
+    // позиция
+    m.c = pos;
+
+    // ориентация
+    Fvector forward = dir;
+    forward.normalize();
+
+    Fvector up = {0.f, 1.f, 0.f};
+    if (abs(forward.dotproduct(up)) > 0.99f)
+        up.set(0.f, 0.f, 1.f);
+
+    Fvector right;
+    right.crossproduct(up, forward);
+    right.normalize();
+
+    up.crossproduct(forward, right);
+    up.normalize();
+
+    m.i = right;
+    m.j = up;
+    m.k = forward;
+
+    auto* element = shell->get_ElementByStoreOrder(0);
+    if (!element)
+        return;
+
+    dBodyID body = element->get_body();
+
+    dMatrix3 R;
+    R[0] = m.i.x;
+    R[1] = m.j.x;
+    R[2] = m.k.x;
+    R[3] = 0;
+    R[4] = m.i.y;
+    R[5] = m.j.y;
+    R[6] = m.k.y;
+    R[7] = 0;
+    R[8] = m.i.z;
+    R[9] = m.j.z;
+    R[10] = m.k.z;
+    R[11] = 0;
+
+    dBodySetPosition(body, m.c.x, m.c.y, m.c.z);
+    dBodySetRotation(body, R);
+    dBodySetLinearVel(body, 0, -0.01f, 0);
+    dBodySetAngularVel(body, 0, 0, 0);
+    dBodyEnable(body);
+    obj->ForceTransform(m);
+    obj->XFORM().set(m);
+
+    shell->applyImpulse(Fvector().set(0, -1.f, 0), 0.1);
 }
