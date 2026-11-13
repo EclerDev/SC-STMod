@@ -237,6 +237,10 @@
     <ClInclude Include="AdvancedDetector.h" />
     <ClInclude Include="ai\monsters\anti_aim_ability.h" />
     <ClInclude Include="CBatutZone.h" />
+    <ClInclude Include="CSpot.h" />
+    <ClInclude Include="CSpotManager.h" />
+    <ClInclude Include="HUDIcons.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SC_UI.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="embedded_editor\embedded_editor_debug_rt.h" />
@@ -1500,6 +1504,9 @@
     <ClCompile Include="..\COMMON_AI\script_writer_script.cpp" />
     <ClCompile Include="AdvancedDetector.cpp" />
     <ClCompile Include="CBatutZone.cpp" />
+    <ClCompile Include="CSpot.cpp" />
+    <ClCompile Include="CSpotManager.cpp" />
+    <ClCompile Include="HUDIcons.cpp" />
     <ClCompile Include="SC_UI.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="embedded_editor\embedded_editor_debug_rt.cpp" />
@@ -2463,6 +2470,9 @@
     <ProjectReference Include="..\..\3rd_party\Src\imgui\imgui.vcxproj">
       <Project>{c8fbc3ce-d6de-4fc3-bc15-7b647614db09}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="xrGame.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,11 +6,8 @@
 #include "ui/UIDialogWnd.h"
 #include "ui/UIScrollBar.h"
 #include "ui/UIScrollView.h"
+#include "physic_item.h"
 #include "SC_UI.h"
-
-class CPhysicItem;
-class CEntityAlive;
-
 #include <sstream>
 #include <iomanip>
 #include <xrstring.h>
@@ -210,7 +207,7 @@ protected:
 
 
 // Маленький фрейм, который высвечивается при наведении на предмет. Оба классса бы потом вынести отсюда, потому что они нужны будут везде
-class CUIItemSmallInfo;
+//class CUIItemSmallInfo;
 
 // Отвечает за уи контейнера
 /* class CUIItemContainer : public CUIDialogWnd

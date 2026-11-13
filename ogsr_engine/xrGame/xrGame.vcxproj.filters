@@ -2110,6 +2110,15 @@
     <Filter Include="AI\AScript\ScriptClasses\UI\Common\SC_Ui">
       <UniqueIdentifier>{525ecc81-0567-4c8a-8540-79d655c684c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Server\ServerEntities\SpotManager">
+      <UniqueIdentifier>{ad672473-9f16-476e-b7bb-3c87648fb143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Server\ServerEntities\SpotManager\CSpot">
+      <UniqueIdentifier>{fbe459c3-f603-4471-8c6b-c483b7c49252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\AScript\ScriptClasses\UI\Common\HUDIcons">
+      <UniqueIdentifier>{7b55b4ad-5d38-47f9-bff2-764cf44017f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mt_config.h">
@@ -6083,6 +6092,16 @@
     <ClInclude Include="SC_UI.h">
       <Filter>AI\AScript\ScriptClasses\UI\Common\SC_Ui</Filter>
     </ClInclude>
+    <ClInclude Include="CSpotManager.h">
+      <Filter>Core\Server\ServerEntities\SpotManager</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="CSpot.h">
+      <Filter>Core\Server\ServerEntities\SpotManager\CSpot</Filter>
+    </ClInclude>
+    <ClInclude Include="HUDIcons.h">
+      <Filter>AI\AScript\ScriptClasses\UI\Common\HUDIcons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -8909,6 +8928,15 @@
     <ClCompile Include="SC_UI.cpp">
       <Filter>AI\AScript\ScriptClasses\UI\Common\SC_Ui</Filter>
     </ClCompile>
+    <ClCompile Include="CSpotManager.cpp">
+      <Filter>Core\Server\ServerEntities\SpotManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpot.cpp">
+      <Filter>Core\Server\ServerEntities\SpotManager\CSpot</Filter>
+    </ClCompile>
+    <ClCompile Include="HUDIcons.cpp">
+      <Filter>AI\AScript\ScriptClasses\UI\Common\HUDIcons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuildStep Include="Explosive.h">
@@ -8917,5 +8945,8 @@
     <CustomBuildStep Include="dRayMotions.h">
       <Filter>Core\Client\Objects\physics\Colliders\RayMotions-Collider</Filter>
     </CustomBuildStep>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="xrGame.rc" />
   </ItemGroup>
 </Project>

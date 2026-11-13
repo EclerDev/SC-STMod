@@ -313,6 +313,7 @@ public:
 private:
     bool m_is_removing_objects;
 
+
 public:
     bool is_removing_objects() const override { return m_is_removing_objects; }
     void remove_objects();

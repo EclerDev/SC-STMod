@@ -10,6 +10,10 @@
 #include "CustomHUD.h"
 #include "perlin.h"
 
+//#+#
+#include "../xrGame/CSpotManager.h"
+
+
 ENGINE_API IGame_Persistent* g_pGamePersistent = NULL;
 
 ENGINE_API bool IsMainMenuActive() { return g_pGamePersistent && g_pGamePersistent->m_pMainMenu && g_pGamePersistent->m_pMainMenu->IsActive(); }
@@ -47,7 +51,12 @@ void IGame_Persistent::OnAppActivate() {}
 
 void IGame_Persistent::OnAppDeactivate() {}
 
-void IGame_Persistent::OnAppStart() { Environment().load(); }
+void IGame_Persistent::OnAppStart() 
+{ 
+    Environment().load(); 
+    //#+# del mb
+    g_CSpotManager.LoadConfig();
+}
 
 void IGame_Persistent::OnAppEnd()
 {
@@ -139,6 +148,9 @@ void IGame_Persistent::OnFrame()
         Environment().OnFrame();
         UpdateHudRaindrops();
         UpdateRainGloss();
+
+        //#+# del mb
+        g_CSpotManager.Update();
     }
 
     Device.Statistic->Particles_starting = ps_needtoplay.size();

@@ -21,6 +21,9 @@
 #include "material_manager.h"
 #include "game_base_space.h"
 
+//#+#
+#include "CSpotManager.h"
+
 #define SMALL_ENTITY_RADIUS 0.6f
 #define BLOOD_MARKS_SECT "bloody_marks"
 
@@ -306,6 +309,10 @@ void CEntityAlive::Die(CObject* who)
     ISpatial* self = smart_cast<ISpatial*>(this);
     if (self)
         self->spatial.type &= ~STYPE_REACTTOSOUND;
+
+
+    //#+# del mb
+    g_CSpotManager.OnNpcDeath(this->ID());
 }
 
 //вывзывает при подсчете хита

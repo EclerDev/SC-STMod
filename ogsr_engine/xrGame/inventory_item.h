@@ -12,7 +12,7 @@
 #include "hit_immunity.h"
 #include "attachable_item.h"
 #include "ui\UIIconParams.h"
-#include "SC_UI.h"
+//#include "SC_UI.h"
 
 class CUIInventoryCellItem;
 

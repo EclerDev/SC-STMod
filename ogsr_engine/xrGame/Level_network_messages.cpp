@@ -16,6 +16,9 @@
 #include "HudManager.h"
 #include "UIGameSP.h"
 
+//#+#
+#include "CSpotManager.h"
+
 void CLevel::ClientReceive()
 {
 
@@ -95,12 +98,16 @@ void CLevel::ClientReceive()
                     CSavedGameWrapper wrapper(saved_name);
                     if (wrapper.level_id() == ai().level_graph().level_id())
                     {
+                        g_CSpotManager.OnLoadGame();
+
                         Engine.Event.Defer("Game:QuickLoad", size_t(xr_strdup(saved_name)), 0);
 
                         break;
                     }
                 }
             }
+            
+            g_CSpotManager.OnLoadGame();
 
             Engine.Event.Defer("KERNEL:disconnect");
             Engine.Event.Defer("KERNEL:start", size_t(xr_strdup(*m_caServerOptions)), size_t(xr_strdup(*m_caClientOptions)));

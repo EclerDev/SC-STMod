@@ -25,6 +25,9 @@
 
 #include "saved_game_wrapper.h"
 #include "script_vars_storage.h"
+//#+# del mb
+#include "CSpotManager.h"
+
 
 using namespace ALife;
 
@@ -64,6 +67,7 @@ void CALifeStorageManager::save(LPCSTR save_name, bool update_name)
         registry().save(stream);
 
         g_ScriptVars.save(stream);
+        g_CSpotManager.save(stream);
 
         source_count = stream.tell();
         const void* source_data = stream.pointer();
@@ -119,6 +123,8 @@ void CALifeStorageManager::load(void* buffer, const u32& buffer_size, LPCSTR fil
     registry().load(source);
 
     g_ScriptVars.load(source);
+    //#+# del mb
+    g_CSpotManager.load(source);
 
     can_register_objects(true);
 
